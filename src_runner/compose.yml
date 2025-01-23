@@ -1,0 +1,16 @@
+networks:
+  wise_b_network:
+    name: wise_b_network
+    driver: bridge
+
+services:
+  wise_runner:
+    image: gitlab/gitlab-runner:alpine
+    container_name: ss_runner
+    restart: always
+    privileged: true
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./gitlab-runner/:/etc/gitlab-runner/
+    networks:
+    -  wise_b_network
